@@ -3,6 +3,7 @@ package ifrs.edu.com;
 import java.util.Scanner;
 
 import ifrs.edu.com.resolutions.Exercise;
+import ifrs.edu.com.resolutions.Extra;
 
 public class App {
     public static void main(String[] args) {
@@ -14,9 +15,10 @@ public class App {
             option = scan.nextInt();
             switch (option) {
                 case 1:
-                    new Exercise().Start();
+                    new Exercise().setup();
                     break;
                 case 2:
+                    new Extra().setup();
                     break;
                 case 0:
                     System.out.println("Exiting...");

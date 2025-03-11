@@ -2,6 +2,7 @@ package ifrs.edu.com.resolutions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 class InnerExercise {
     private static final int MAX = 10;
@@ -67,8 +68,10 @@ class InnerExercise {
 
 public class Exercise {
     private static InnerExercise resolution = new InnerExercise();
+    private Scanner scan = new Scanner(System.in);
 
-    public void Start() {
+    public void setup() {
+
         Thread producerThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -93,5 +96,24 @@ public class Exercise {
 
         producerThread.start();
         consumerThread.start();
+
+        int option;
+        while (true) {
+            System.out.println("Input 0 to Cancel: ");
+            option = scan.nextInt();
+
+            if (option == 0) {
+                producerThread.interrupt();
+                consumerThread.interrupt();
+                break;
+            }
+        }
+
+        try {
+            producerThread.join();
+            consumerThread.join();
+        } catch (InterruptedException err) {
+            err.printStackTrace();
+        }
     }
 }
