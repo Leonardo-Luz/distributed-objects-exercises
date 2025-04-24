@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Clientes</title>
+</head>
+<body>
+	<h1>Lista de Clientes</h1>
+	<div>
+		<table border="1" th:if="${!clientes.empty}">
+			<tr>
+				<td>Id</td>
+				<td>Nome</td>
+				<td>E-mail</td>
+				<td>Telefone</td>
+				<td>Editar</td>
+				<td>Excluir</td>
+			</tr>
+			<tr th:each="c : ${clientes}">
+				<td th:text="${c.id}"></td>
+				<td th:text="${c.nome}"></td>
+				<td th:text="${c.email}"></td>
+				<td th:text="${c.telefone}"></td>
+				<td> <a th:href="@{/cliente/preparaEdita/{id}(id=${c.id})}">Editar</a></td>
+				<td> <a th:href="@{/cliente/exclui/{id}(id=${c.id})}">Excluir</a></td>
+			</tr>
+		</table>
+		<span th:if="${clientes.empty}">Não existem clientes cadastrados</span>
+	</div>
+	<p>
+		<a th:href="@{/cliente/inicio}">Voltar</a>
+	</p>
+
+</body>
+</html>
